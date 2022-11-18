@@ -19,7 +19,7 @@ public class Locators {
         WebDriver cdriver = new ChromeDriver();//Chrome driver çalıştırmak için
         int milis = 2000;//2 saniye bekleme süresi
 
-        cdriver.get("https://www.demoqa.com/login");
+        cdriver.get("https://demoqa.com/login");
         Thread.sleep(milis);//Bekleme adımı için gerekli
 
         //ID
