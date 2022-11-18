@@ -75,6 +75,7 @@ public class CheckBox {
         }
         Thread.sleep(milis);
 
+        cdriver.quit();
 
     }
 }
