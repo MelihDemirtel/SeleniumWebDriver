@@ -9,10 +9,10 @@ public class DriverNavigateMethods {
     public static void main(String[] args) throws InterruptedException {
         WebDriverManager.chromedriver().setup();//Chrome browser kurulumu
         WebDriver cdriver = new ChromeDriver();//Chrome driver çalıştırmak için
-        int milis = 2000;
+        int milis = 2000;//2 saniye bekleme süresi
 
         cdriver.get("https://www.facebook.com");
-        Thread.sleep(milis);
+        Thread.sleep(milis);//Bekleme adımı için gerekli
 
         cdriver.navigate().to("https://www.google.com");//driver.get farkı bu şekilde verirseniz sayfada ileri geri yapabilirsiniz
         Thread.sleep(milis);
