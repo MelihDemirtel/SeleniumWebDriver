@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.sql.Time;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class DriverManageMethods {
 
@@ -35,6 +37,30 @@ public class DriverManageMethods {
 
         cdriver.manage().window().fullscreen();//Browser penceresini full ekran yapar
         Thread.sleep(milis);
+
+        cdriver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        /*
+            Driver'a kullanacagimiz webelementlerin bulunmasi icin
+            bekleyecegi maximum sureyi belirtir.
+            Driver bu sure icerisinde web elementi bulursa
+            beklemeden calismaya devam eder.
+            Bu sure bittigi halde webElement bulunamamissa
+            exception vererek calismayi durdurur.
+         */
+
+        cdriver.manage().timeouts().pageLoadTimeout(5,TimeUnit.SECONDS);
+        /*
+            Bu, bir hata atmadan önce bir sayfanın tamamen yüklenmesi için
+            beklenecek süreyi ayarlar.
+            Zaman aşımı negatifse, sayfa yüklemeleri süresiz olabilir.
+         */
+
+        cdriver.manage().timeouts().setScriptTimeout(5, TimeUnit.SECONDS);
+        /*
+            Bu, WebDriver'ın bir hata atmadan önce eşzamansız bir komut dosyasının
+            yürütmeyi bitirmesini beklemesi gereken süreyi ayarlamak için kullanılır.
+            Zaman aşımı negatifse, betiğin süresiz olarak çalışmasına izin verilir.
+         */
 
         cdriver.quit();//Browser'ı kapatır
 
