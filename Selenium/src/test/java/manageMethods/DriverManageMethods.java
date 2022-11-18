@@ -16,12 +16,12 @@ public class DriverManageMethods {
         int milis = 2000;//2 saniye bekleme süresi
 
         cdriver.get("https://www.google.com");
-        Thread.sleep(milis);
-
-        cdriver.manage().window().maximize();//Browser'ı tam ekran yapar
         Thread.sleep(milis);//Bekleme adımı için gerekli
 
-        System.out.println(cdriver.manage().window().getSize());//Browser penceresinin boyutlarını verir
+        cdriver.manage().window().maximize();//Browser'ı tam ekran yapar
+        Thread.sleep(milis);
+
+        System.out.println("Pencere Boyutu: "+cdriver.manage().window().getSize());//Browser penceresinin boyutlarını verir
         Thread.sleep(milis);
 
         cdriver.manage().window().setSize(new Dimension(640,360));//Browser penceresinin boyutunu belirlemek için
@@ -30,7 +30,7 @@ public class DriverManageMethods {
         cdriver.manage().window().setPosition(new Point(100,100));//Browser penceresinin açılma konumu koordinatlarını belirler
         Thread.sleep(milis);
 
-        System.out.println(cdriver.manage().window().getPosition());//Browser penceresinin açılma konumu koordinatlarını verir
+        System.out.println("Pencere Konumu: "+cdriver.manage().window().getPosition());//Browser penceresinin açılma konumu koordinatlarını verir
         Thread.sleep(milis);
 
         cdriver.manage().window().fullscreen();//Browser penceresini full ekran yapar
