@@ -14,7 +14,7 @@ public class WebElements1 {
     public static void main(String[] args) throws InterruptedException {
         WebDriverManager.chromedriver().setup();//Chrome browser kurulumu
         WebDriver cdriver = new ChromeDriver();//Chrome driver çalıştırmak için
-        int milis = 2000;//Bekleme için 3 saniye değişkeni tanımlanır
+        int milis = 2000;//Bekleme için 2 saniye değişkeni tanımlanır
         JavascriptExecutor jsx = (JavascriptExecutor) cdriver;//Sayfada scroll yapabilmek için yazdık
 
         cdriver.manage().window().maximize();
