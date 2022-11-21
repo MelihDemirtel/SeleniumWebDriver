@@ -6,6 +6,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +23,35 @@ public class RadioButton {
 
         cdriver.get("https://demoqa.com/radio-button");
 
-        WebElement checkBoxHome = cdriver.findElement(By.xpath("//span[contains(text(),'Home')]"));
+        WebElement radioButtonYes = cdriver.findElement(By.xpath("//label[@for='yesRadio']"));
+        WebElement radioButtonImpressive = cdriver.findElement(By.xpath("//label[@for='impressiveRadio']"));
+        WebElement radioButtonNo = cdriver.findElement(By.xpath("//label[@for='noRadio']"));
+
+        boolean isSelectedYes = radioButtonYes.isSelected();
+        if(isSelectedYes == false) {
+            radioButtonYes.click();
+            WebElement displayYes = cdriver.findElement(By.xpath("//span[contains(text(),'Yes')]"));
+            Assert.assertTrue(displayYes.isDisplayed());
+            System.out.println("Yes Seçildi");
+        }
+        Thread.sleep(milis);
+
+        boolean isSelectedImpressive = radioButtonImpressive.isSelected();
+        if(isSelectedImpressive == false) {
+            radioButtonImpressive.click();
+            WebElement displayImpressive = cdriver.findElement(By.xpath("//span[contains(text(),'Impressive')]"));
+            Assert.assertTrue(displayImpressive.isDisplayed());
+            System.out.println("Impressive Seçildi");
+        }
+        Thread.sleep(milis);
+
+        boolean isClickableNo = radioButtonNo.isEnabled();
+        if(isClickableNo == true){
+            System.out.println("No Seçilemez");
+        }
+        Thread.sleep(milis);
+
+        cdriver.quit();
 
     }
 }
