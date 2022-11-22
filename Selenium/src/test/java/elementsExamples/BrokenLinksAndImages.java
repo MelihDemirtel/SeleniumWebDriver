@@ -30,19 +30,41 @@ public class BrokenLinksAndImages {
         cdriver.get("https://demoqa.com/broken");
         Thread.sleep(pageLoad);//Sayfanın yüklenmesi için beklenir
 
+        jsx.executeScript("window.scrollBy(0,250)","");//Sayfa biraz aşağı kaydırılır
+
+        //Kırık link için
         String url = cdriver.findElement(By.cssSelector("a[href*='http://the-internet.herokuapp.com/status_codes/500']")).getAttribute("href");// a[href*='brokenlink'] // a[href*='soapui']
 
-        HttpURLConnection conn = (HttpURLConnection)new URL(url).openConnection();
+        HttpURLConnection connLink = (HttpURLConnection)new URL(url).openConnection();
 
-        conn.setRequestMethod("HEAD");
-        conn.connect();
-        int responseCode = conn.getResponseCode();
-        System.out.println("Code : "+responseCode);
-        if(responseCode > 400)
+        connLink.setRequestMethod("HEAD");
+        connLink.connect();
+        int responseCodeLink = connLink.getResponseCode();
+        System.out.println("Code : "+responseCodeLink);
+        if(responseCodeLink > 400)
         {
             System.out.println("Broken Link : "+url);
-            Assert.assertTrue(false);
+            Assert.assertEquals(responseCodeLink,500);
         }
+
+        Thread.sleep(milis);
+
+        //Kırık görsel için
+        String img = cdriver.findElement(By.cssSelector("img[src*='/images/Toolsqa_1.jpg']")).getAttribute("src");// a[href*='brokenlink'] // a[href*='soapui']
+
+        HttpURLConnection connImg = (HttpURLConnection)new URL(url).openConnection();
+
+        connImg.setRequestMethod("HEAD");
+        connImg.connect();
+        int responseCodeImg = connImg.getResponseCode();
+        System.out.println("Code : "+responseCodeImg);
+        if(responseCodeImg > 400)
+        {
+            System.out.println("Broken Image : "+img);
+            Assert.assertEquals(responseCodeImg,500);
+        }
+
+        cdriver.quit();//Browser kapatalır
 
     }
 }
