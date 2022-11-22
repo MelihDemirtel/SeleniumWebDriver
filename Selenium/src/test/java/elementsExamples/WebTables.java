@@ -12,7 +12,7 @@ public class WebTables {
     public static void main(String[] args) throws InterruptedException {
         WebDriverManager.chromedriver().setup();//Chrome browser kurulumu
         WebDriver cdriver = new ChromeDriver();//Chrome driver çalıştırmak için
-        int milis = 1000;//Bekleme için 2 saniye değişkeni tanımlanır
+        int milis = 1000;//Bekleme için 1 saniye değişkeni tanımlanır
         JavascriptExecutor jsx = (JavascriptExecutor) cdriver;//Sayfada scroll yapabilmek için yazdık
 
         //Tabloya eklenecek veriler
