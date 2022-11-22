@@ -22,37 +22,44 @@ public class Links {
         int pageLoad = 2000;//Bekleme için 2 saniye değişkeni tanımlanır
         JavascriptExecutor jsx = (JavascriptExecutor) cdriver;//Sayfada scroll yapabilmek için yazdık
 
-        String expectedUrl = "https://demoqa.com";
+        String expectedUrl = "https://demoqa.com/";//Beklenen URL adresini tanımladık
 
         cdriver.manage().window().maximize();//Browser Sayfasını büyütmek için
         cdriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);//Hata fırlatmadan önce bekleme süresi
 
-        cdriver.navigate().to("https://demoqa.com/links");
+        cdriver.navigate().to("https://demoqa.com/links");//Navigate metodunu kullanabilmek için URl i navigate to olarak çağırdık. Get ile çağırdığımızda bu metodları kullanamıyoruz
         Thread.sleep(pageLoad);//Sayfanın yüklenmesi için beklenir
 
-        WebElement homeLink = cdriver.findElement(By.linkText("https://demoqa.com"));
+        WebElement homeLink = cdriver.findElement(By.id("simpleLink"));//Sayfadaki link butonu tanımlanır
 
-        homeLink.click();
+        homeLink.click();//Home linkine tıklanır
         Thread.sleep(pageLoad);
 
-        Set<String> windows = cdriver.getWindowHandles();
+        //Açılan sekmeler için bir küme seti oluşturuypruz
+        Set<String> windows = cdriver.getWindowHandles();//
 
+        //Set arayüzündeki verileri iterator ile okuyoruz
+        //List ve Set koleksiyonları üzerinde, bütün öğeleri tarayacak biçimde tekrarlanan eylemleri gerçekleştirmek için kullanılır
         Iterator<String> iterator = windows.iterator();
 
-        String parentId = iterator.next();
-        String childId = iterator.next();
+        //Next ile sıra ile sekmeleri değişkenlere tanımlıyoruz
+        String parentId = iterator.next();//İlk sayfa
+        String childId = iterator.next();//ikinci sekme
 
-        cdriver.switchTo().window(childId);
+        cdriver.switchTo().window(childId);//2.Sekmeye geçilir
         Thread.sleep(pageLoad);
-        String actualUrl = cdriver.getCurrentUrl();
+        String actualUrl = cdriver.getCurrentUrl();//2.Sekmenin URL i değişkene atanır
 
-        Assert.assertEquals(actualUrl, expectedUrl);
+        Assert.assertEquals(actualUrl, expectedUrl);//.Gerçekleşen ve beklenen sonuç karşılaştırılır
 
-        cdriver.close();
+        cdriver.close();//2.Sekme yani açık olan sekme kapanır
+        Thread.sleep(pageLoad);
 
-        Assert.assertTrue(homeLink.isDisplayed());
+        cdriver.switchTo().window(parentId);//İlk sekmeye geri dönülür
 
-        cdriver.quit();
+        Assert.assertTrue(homeLink.isDisplayed());//İlk sekmede olduğumuz doğrulanır
+
+        cdriver.quit();//Browser kapatılır
 
     }
 }
